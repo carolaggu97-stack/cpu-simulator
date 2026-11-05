@@ -1,0 +1,11 @@
+# sum_memory: adds the values at memory addresses 0-3
+# and stores the total at address 8. The cache stays off.
+ADDI,R1,R0,0
+ADDI,R2,R0,4
+ADD,R3,R0,R0
+LW,R4,0(R1)
+ADD,R3,R3,R4
+ADDI,R1,R1,1
+BNE,R1,R2,3
+SW,R3,8(R0)
+HALT,;

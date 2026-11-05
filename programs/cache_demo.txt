@@ -1,0 +1,18 @@
+# cache_demo: reads addresses 0-3 twice to show cache hits.
+# Pass 1 = all misses, pass 2 = all hits.
+# Then flushes the cache and turns it off.
+CACHE,1
+ADDI,R5,R0,0
+ADDI,R6,R0,2
+ADDI,R1,R0,0
+ADDI,R2,R0,4
+LW,R4,0(R1)
+ADDI,R1,R1,1
+BNE,R1,R2,5
+ADDI,R5,R5,1
+BNE,R5,R6,3
+CACHE,2
+LW,R4,0(R0)
+CACHE,0
+LW,R4,0(R0)
+HALT,;
