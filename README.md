@@ -138,9 +138,33 @@ cpu-simulator/
 
 ## What I learned
 
-- *(Write your own notes here, for example: how the fetch-decode-execute
-  loop works, why FIFO removed a value I had just used, and why a
-  function needs JR to return.)*
+- - **How a CPU really runs a program.** Every instruction goes through the
+  same three steps: fetch, decode, execute. Building this loop myself made
+  it clear that a "program" is just a list of simple steps, and the program
+  counter decides which one comes next.
+- **Jumps and loops are just changes to the program counter.** BNE and J
+  don't do anything magic. They only set the PC to a different number.
+  That's how a few lines of code can repeat many times.
+- **A cache only helps if you reuse data.** My first program read each
+  memory address only once, so the hit rate was 0%. In `cache_demo`, the
+  second pass over the same addresses was all hits, and those loads cost
+  2 cycles instead of 11.
+- **FIFO has a weakness.** When the cache was full, FIFO removed the oldest
+  value, even though I had just used it. That showed me why some CPUs use
+  LRU (least recently used) instead.
+- **Write-through is simple but slow for writes.** Every store goes all the
+  way to memory, so SW always costs the full 10 cycles. The upside is that
+  memory and the cache never disagree.
+- **Functions need a way to come back.** JAL saves the return address, but
+  I had to add JR to jump back to it. I also learned to put HALT before the
+  function code, or the CPU runs straight into it by accident.
+- **Small details matter.** R0 is always 0, so `8(R0)` is an easy way to
+  write "address 8". And one missing bracket stopped all my tests from
+  running, until I learned to look at the line *above* the error.
+- **Tests save time.** With 30 unit tests, I can change the code and know
+  in one second if I broke something, instead of checking the output by eye.
+- **Git works best in small steps.** I committed after every file, so my
+  history shows how the project was built, one piece at a time.
 
 ## Ideas for the future
 
