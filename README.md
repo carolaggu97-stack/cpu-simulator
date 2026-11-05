@@ -138,7 +138,7 @@ cpu-simulator/
 
 ## What I learned
 
-- - **How a CPU really runs a program.** Every instruction goes through the
+- **How a CPU really runs a program.** Every instruction goes through the
   same three steps: fetch, decode, execute. Building this loop myself made
   it clear that a "program" is just a list of simple steps, and the program
   counter decides which one comes next.
